@@ -67,13 +67,13 @@
 			input.pid {
 				border-style: inset; border-width: 2px; width: 70px;
 				margin: 2px 2px 0px 4px; text-align: center;
-				color: #000000; background-color: #fceab6;
+				color: #555555; background-color: #fceab6; font-size: 13px;
 				font-family: monospace;
 			}
 			input.plot {
 				border-style: inset; border-width: 2px; width: 70px;
 				margin: 2px 2px 0px 4px; text-align: center;
-				color: #000000; background-color: #ddffdd;
+				color: #555555; background-color: #ddffdd; font-size: 13px;
 				font-family: monospace;
 			}
 		</style>
@@ -112,11 +112,12 @@
 			</div>
 		</nav>
 		<!-- ======================================================================================================================================== -->
+		<br><br>
 		<div style="text-align:center" width="100%">
-			<h1 style="color:rgba(137, 99, 235, 0.9);">【PID制御】</h1>
+			<h1 style="color:rgba(95, 207, 168, 0.9);">【PID制御】</h1>
 		</div>
-		
-		<div class="left">
+		<br>
+		<div style="text-align:center" >
 			<p>
 				&nbsp;&nbsp;&nbsp;「単純な熱伝導」仮定の下、「目標温度(3段階)」へ順にFit
 			</p>
@@ -277,7 +278,7 @@
 										<td align="center" width="200px">
 											<input type="range"  width="100%" id="PID_pb_rng" min="0.9" max="1" step="0.01" value="0.9">
 										</td>
-										<td align="center" style="width: 80px;">
+										<td align="center">
 											<input type="number" class="pid" id="PID_pb_num" name="PID_pb" min="0.9" max="1" step="0.01" value="0.9">
 										</td>
 									</tr>
@@ -286,12 +287,10 @@
 										<td align="center" style="width: 120px; background-color: #ffdb87; font-size: 12px;">
 											積分時間 <i>T<sub>i</sub></i> [s]
 										</td>
-										
 										<td align="center" width="200px">
 											<input type="range"  width="100%" id="PID_i_rng" min="0.07" max="1.2" step="0.01" value="0.07">
 										</td>
-										
-										<td align="center" style="width: 80px;">
+										<td align="center">
 											<input type="number" class="pid" id="PID_i_num" name="PID_i" min="0.07" max="1.2" step="0.01" value="0.07">
 										</td>
 									</tr>
@@ -300,12 +299,10 @@
 										<td align="center" style="width: 120px; background-color: #ffdb87; font-size: 12px;">
 											微分時間 <i>T<sub>d</sub></i> [s]
 										</td>
-										
 										<td align="center" width="200px">
 											<input type="range"  width="100%" id="PID_d_rng" min="0.0" max="0.5" step="0.01" value="0.5">
 										</td>
-										
-										<td align="center" style="width: 80px;">
+										<td align="center">
 											<input type="number" class="pid" id="PID_d_num" name="PID_d" min="0.0" max="0.5" step="0.01" value="0.5">
 										</td>
 									</tr>
@@ -324,7 +321,7 @@
 								<tbody>
 									<!-- ------------------------------------------------------------------------------------ -->
 									<tr>
-										<td align="center" style="width: 140px; background-color: #dddddd; font-size: 12px;">
+										<td align="center" style="width: 120px; background-color: #dddddd; font-size: 12px;">
 											制御周期 <i>Δtc</i> [s]
 										</td>
 										<td align="center">
@@ -404,141 +401,6 @@
 			let PID_error_prev2 = 0;
 			let PID_itemD = 0;
 			let PID_itemD_prev = 0;
-			//==================================================================
-			// Reset
-			window.addEventListener('load', () => {
-				updateGraph('sim', 'graph_input', 400, 300);
-				updateGraph('sim', 'graph_monit', 400, 300);
-			});
-			
-			function setAllRangesOff () {
-				updateRangeStyles(PID_pb_rng, PID_pb_num, false);
-				updateRangeStyles(PID_i_rng, PID_i_num, false);
-				updateRangeStyles(PID_d_rng, PID_d_num, false);
-			}
-			//==================================================================
-			function updateGraph(form_id, plot_id, width, height) {
-				let forms = document.getElementById(form_id);
-				//-------------------------------------------------
-				PID_pb = parseFloat(forms.PID_pb.value);
-				PID_i = parseFloat(forms.PID_i.value);
-				PID_d = parseFloat(forms.PID_d.value);
-				PID_dt = parseFloat(forms.PID_dt.value);
-				if (isNaN(PID_pb) || isNaN(PID_d) || isNaN(PID_d) || isNaN(PID_dt)) {
-					alert("[PIDパラメータ] に入力ミスがあります");
-					return;
-				}
-				
-				TEMP_input_limL = parseFloat(forms.TEMP_input_limL.value);
-				if (isNaN(TEMP_input_limL)) {
-					alert("[温度制御 下限] に入力ミスがあります");
-					return;
-				}
-				
-				TEMP_input_limU = parseFloat(forms.TEMP_input_limU.value);
-				if (isNaN(TEMP_input_limU)) {
-					alert("[温度制御 上限] に入力ミスがあります");
-					return;
-				}
-				
-				TIME_goal_1 = parseFloat(forms.TIME_goal_1.value);
-				TEMP_goal_1 = parseFloat(forms.TEMP_goal_1.value);
-				TIME_goal_2 = parseFloat(forms.TIME_goal_2.value);
-				TEMP_goal_2 = parseFloat(forms.TEMP_goal_2.value);
-				TIME_goal_3 = parseFloat(forms.TIME_goal_3.value);
-				TEMP_goal_3 = parseFloat(forms.TEMP_goal_3.value);
-				
-				if (isNaN(TIME_goal_1) || isNaN(TIME_goal_2) || isNaN(TIME_goal_3) ||
-					isNaN(TEMP_goal_1) || isNaN(TEMP_goal_2) || isNaN(TEMP_goal_3) ) {
-					alert("[目標温度 (3段階)] に入力ミスがあります");
-					return;
-				} 
-				
-				TIME_max = parseFloat(forms.TIME_max.value);
-				TIME_min = parseFloat(forms.TIME_min.value);
-				TIME_step = parseFloat(forms.TIME_step.value);
-				
-				TEMP_plot_max = parseFloat(forms.TEMP_plot_max.value);
-				TEMP_plot_min = parseFloat(forms.TEMP_plot_min.value);
-				TEMP_plot_step = parseFloat(forms.TEMP_plot_step.value);
-				
-				if (isNaN(TIME_min) || isNaN(TIME_max) || isNaN(TIME_step) ||
-					isNaN(TEMP_plot_min) || isNaN(TEMP_plot_max) || isNaN(TEMP_plot_step) ) {
-					alert("[グラフ設定] に入力ミスがあります");
-					return;
-				} 
-				
-				let lcol = "#00ff00";
-				if (plot_id == 'graph_monit') {
-					lcol = "#23f9fc";
-				} else if (plot_id == 'graph_input') {
-					lcol = "#ffc240";
-				}
-				
-				gopen(
-					plot_id, 
-					TIME_min,
-					TIME_max,
-					TIME_step,
-					TEMP_plot_min,
-					TEMP_plot_max,
-					TEMP_plot_step,
-					width,
-					height,
-					25, 25, 40, 50,
-					lcol
-				);
-				
-				if (flag_Heater > 0) {
-					TEMP_input_prev = TEMP_input_limL;
-					TEMP_input = TEMP_input_limL;
-					TEMP_monit = TEMP_input_limL;
-				} else {
-					TEMP_input_prev = TEMP_input_limU;
-					TEMP_input = TEMP_input_limU;
-					TEMP_monit = TEMP_input_limU;
-				}
-				//--------------------------------------------------------------------------
-				// Update 'Prev' series
-				PID_error_prev2 = PID_error_prev;
-				PID_error_prev	= PID_error;
-				PID_itemD_prev = PID_itemD;
-				//--------------------------------------------------------------------------
-				TIME_now = TIME_min;
-				plotTemp(plot_id, TEMP_goal_1, TIME_goal_1);
-				plotTemp(plot_id, TEMP_goal_2, TIME_goal_2);
-				plotTemp(plot_id, TEMP_goal_3, TIME_goal_3);
-				
-				gclose();
-				//--------------------------------------------------------------------------
-			};
-			//==================================================================
-			function updateRangeStyles (objRng, objNum, isOn=false) {
-				let color_thumb_on = 'rgba(124, 252, 0, .95)';
-				let color_thumb_off = 'rgba(72, 61, 139, .95)';
-				let color_thumb_shadow_on = 'rgba(0, 0, 255, .1)';
-				let color_thumb_shadow_off = 'none';
-				let color_num_on = 'rgba(50, 205, 50, .95)';
-				let color_num_off = 'rgba(128, 128, 128, 1.)';
-				let size_num_on = '14px';
-				let size_num_off = '13px';
-				let color_thumb = color_thumb_off;
-				let color_thumb_shadow = color_thumb_shadow_off;
-				let color_num = color_num_off;
-				let size_num = size_num_off;
-				
-				if (isOn) {
-					color_thumb = color_thumb_on;
-					color_thumb_shadow = color_thumb_shadow_on;
-					color_num = color_num_on;
-					size_num = size_num_on;
-				}
-				
-				objRng.style.setProperty('--color-range-thumb-background', color_thumb);
-				objRng.style.setProperty('--color-range-thumb-box-shadow', color_thumb_shadow);
-				objNum.style.fontSize = size_num;
-				objNum.style.color = color_num;
-			}
 			//==================================================================
 			// リアルタイム更新 @Pb
 			let PID_pb_rng = document.getElementById('sim').PID_pb_rng;
@@ -700,13 +562,13 @@
 						//--------------------------------------------------------------------------
 						let PID_power;  //操作量[%] https://www.fa.omron.co.jp/guide/technicalguide/53/103/index.html#6
 						
-						if ( (TEMP_monit - TEMP_goal_) < ( - (Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5)) ) {
+						if ( TEMP_goal_ - TEMP_monit > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) {
 							PID_power = 0.0;  //出力OFF
-						} else if ( (TEMP_monit - TEMP_goal_) > ((Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5)) ) {
+						} else if ( TEMP_monit - TEMP_goal_ > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) {
 							PID_power = 1.0;  //出力全開
 						} else {
-							PID_power = (TEMP_monit	- TEMP_goal_ + (Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5))
-							                                        / (Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
+							PID_power = (TEMP_monit - TEMP_goal_ + Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5)
+							                                    / (Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
 						}
 						//--------------------------------------------------------------------------
 						if (flag_Heater > 0) {
@@ -714,7 +576,7 @@
 						}
 						//--------------------------------------------------------------------------
 						// 偏差Error（設定値Set point Variable－測定値Process Variable）
-						PID_error =	(TEMP_goal_ - TEMP_monit)/(Math.abs(TEMP_input_limU - TEMP_input_limL)*PID_pb);
+						PID_error =	(TEMP_goal_ - TEMP_monit)/(Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
 						//--------------------------------------------------------------------------
 						// ※「1次遅れフィルタ」 ※高周波成分を除去
 						let PID_filter = PID_d/(PID_dt + PID_eta * PID_d);
@@ -750,6 +612,138 @@
 					//--------------------------
 				}
 			}
+			//==================================================================			// Reset
+			window.addEventListener('load', () => {
+				updateGraph('sim', 'graph_input', 400, 300);
+				updateGraph('sim', 'graph_monit', 400, 300);
+			});
+			
+			function setAllRangesOff () {
+				updateRangeStyles(PID_pb_rng, PID_pb_num, false);
+				updateRangeStyles(PID_i_rng, PID_i_num, false);
+				updateRangeStyles(PID_d_rng, PID_d_num, false);
+			}
+			//==================================================================
+			function updateGraph(form_id, plot_id, width, height) {
+				let forms = document.getElementById(form_id);
+				//-------------------------------------------------
+				TIME_goal_1 = parseFloat(forms.TIME_goal_1.value);
+				TEMP_goal_1 = parseFloat(forms.TEMP_goal_1.value);
+				TIME_goal_2 = parseFloat(forms.TIME_goal_2.value);
+				TEMP_goal_2 = parseFloat(forms.TEMP_goal_2.value);
+				TIME_goal_3 = parseFloat(forms.TIME_goal_3.value);
+				TEMP_goal_3 = parseFloat(forms.TEMP_goal_3.value);
+				if (isNaN(TIME_goal_1) || isNaN(TIME_goal_2) || isNaN(TIME_goal_3) ||
+					isNaN(TEMP_goal_1) || isNaN(TEMP_goal_2) || isNaN(TEMP_goal_3) ) {
+					alert("[目標温度 (3段階)] に入力ミスがあります");
+					return;
+				} 
+				
+				TIME_max = parseFloat(forms.TIME_max.value);
+				TIME_min = parseFloat(forms.TIME_min.value);
+				TIME_step = parseFloat(forms.TIME_step.value);
+				TIME_now = TIME_min;
+				
+				TEMP_plot_max = parseFloat(forms.TEMP_plot_max.value);
+				TEMP_plot_min = parseFloat(forms.TEMP_plot_min.value);
+				TEMP_plot_step = parseFloat(forms.TEMP_plot_step.value);
+				if (isNaN(TIME_min) || isNaN(TIME_max) || isNaN(TIME_step) ||
+					isNaN(TEMP_plot_min) || isNaN(TEMP_plot_max) || isNaN(TEMP_plot_step) ) {
+					alert("[グラフ設定] に入力ミスがあります");
+					return;
+				}
+				//-------------------------------------------------
+				PID_pb = parseFloat(forms.PID_pb.value);
+				PID_i = parseFloat(forms.PID_i.value);
+				PID_d = parseFloat(forms.PID_d.value);
+				PID_dt = parseFloat(forms.PID_dt.value);
+				if (isNaN(PID_pb) || isNaN(PID_d) || isNaN(PID_d) || isNaN(PID_dt)) {
+					alert("[PIDパラメータ] に入力ミスがあります");
+					return;
+				}
+				
+				TEMP_input_limU = parseFloat(forms.TEMP_input_limU.value);
+				if (isNaN(TEMP_input_limU)) {
+					alert("[温度制御 上限] に入力ミスがあります");
+					return;
+				}
+				
+				TEMP_input_limL = parseFloat(forms.TEMP_input_limL.value);
+				if (isNaN(TEMP_input_limL)) {
+					alert("[温度制御 下限] に入力ミスがあります");
+					return;
+				}
+				
+				if (flag_Heater > 0) {
+					TEMP_input_prev = TEMP_input_limL;
+					TEMP_input = TEMP_input_limL;
+					TEMP_monit = TEMP_input_limL;
+				} else {
+					TEMP_input_prev = TEMP_input_limU;
+					TEMP_input = TEMP_input_limU;
+					TEMP_monit = TEMP_input_limU;
+				}
+				//--------------------------------------------------------------------------
+				// Update 'Prev' series
+				PID_error_prev2 = PID_error_prev;
+				PID_error_prev	= PID_error;
+				PID_itemD_prev = PID_itemD;
+				//--------------------------------------------------------------------------
+				let lcol = "#00ff00";
+				if (plot_id == 'graph_monit') {
+					lcol = "#23f9fc";
+				} else if (plot_id == 'graph_input') {
+					lcol = "#ffc240";
+				}
+				
+				gopen(
+					plot_id, 
+					TIME_min,
+					TIME_max,
+					TIME_step,
+					TEMP_plot_min,
+					TEMP_plot_max,
+					TEMP_plot_step,
+					width,
+					height,
+					25, 25, 40, 50,
+					lcol
+				);
+				
+				plotTemp(plot_id, TEMP_goal_1, TIME_goal_1);
+				plotTemp(plot_id, TEMP_goal_2, TIME_goal_2);
+				plotTemp(plot_id, TEMP_goal_3, TIME_goal_3);
+				
+				gclose();
+				//--------------------------------------------------------------------------
+			};
+			//==================================================================
+			function updateRangeStyles (objRng, objNum, isOn=false) {
+				let color_thumb_on = 'rgba(124, 252, 0, .95)';
+				let color_thumb_off = 'rgba(72, 61, 139, .95)';
+				let color_thumb_shadow_on = 'rgba(0, 0, 255, .1)';
+				let color_thumb_shadow_off = 'none';
+				let color_num_on = 'rgba(50, 205, 50, .95)';
+				let color_num_off = 'rgba(128, 128, 128, 1.)';
+				let size_num_on = '14px';
+				let size_num_off = '13px';
+				let color_thumb = color_thumb_off;
+				let color_thumb_shadow = color_thumb_shadow_off;
+				let color_num = color_num_off;
+				let size_num = size_num_off;
+				
+				if (isOn) {
+					color_thumb = color_thumb_on;
+					color_thumb_shadow = color_thumb_shadow_on;
+					color_num = color_num_on;
+					size_num = size_num_on;
+				}
+				
+				objRng.style.setProperty('--color-range-thumb-background', color_thumb);
+				objRng.style.setProperty('--color-range-thumb-box-shadow', color_thumb_shadow);
+				objNum.style.fontSize = size_num;
+				objNum.style.color = color_num;
+			}
 			//==================================================================
 			function round( number, precision ) {
 				let shift = function (number, precision, reverseShift) {
@@ -762,7 +756,6 @@
 				return shift(Math.round(shift(number, precision, false)), precision, true);
 			}
 			//==================================================================
-			// ======================================================
 			//Hamburger menu
 			const mobileMenu = document.getElementById("mobile-menu");
 			const navList = document.querySelector(".nav-list");
@@ -771,7 +764,7 @@
 				navList.classList.toggle("nav-active");
 				mobileMenu.classList.toggle("toggle");
 			});
-			// ======================================================
+			//==================================================================
 		</script>
 		
 		<script src="./src/plotter.js" type="text/javascript"></script>
