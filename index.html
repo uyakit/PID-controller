@@ -19,7 +19,7 @@
 		
 		<div class="left">
 			<p>
-				&nbsp;&nbsp;&nbsp;「単純な熱伝導」仮定の下、3段階の「目標温度」へ順にFit
+				&nbsp;&nbsp;&nbsp;「単純な熱伝導」仮定の下、「目標温度(3段階)」へ順にFit
 			</p>
 		</div>
 		<!-- ======================================================================================================================================== -->
@@ -32,10 +32,10 @@
 		<table rules="groups" class="center" style="margin-top: 12px;">
 			<tbody>
 				<tr>
-					<td style="padding-right: 10px;" valign="top">
+					<td style="padding-right: 10px; color: #C04F15;" valign="top">
 						入力温度 [℃]
 					</td>
-					<td style="padding-right: 10px;" valign="top">
+					<td style="padding-right: 10px; color: #0D7EAB;" valign="top">
 						制御点温度 [℃]
 					</td>
 				</tr>
@@ -70,100 +70,101 @@
 			<table rules="groups" class="center" style="margin-top: 12px;">
 				<tbody>
 					<tr>
-						<td  valign="top">
+						<td valign="top">
 							<!-- --------------------------------------------------------------------------- -->
 							<table rules="groups" style="margin-top: 12px;">
-								<thead>
-									<tr>
-										<th colspan="4">
-										目標温度 (<i>3段階</i>)
-										</th>
-									</tr> 
-								</thead>
 								<tbody>
 									<tr>
-										<td align="center" style="width: 135px; background-color: #dddddd;">
-											<strong><i>目標温度</i> [℃]</strong>
+										<th colspan="4" style="font-size: 13px;">
+											目標温度 (3段階)
+										</th>
+									</tr>
+									<tr>
+										<td align="center" style="width: 110px; background-color: #dddddd; font-size: 12px;">
+											目標温度 [℃]
 										</td>
 										<td align="center" style="width: 80px;">
-											<input type="text" class="time" name="TEMP_goal_1" value="22.0">
+											<input type="text" class="plot" name="TEMP_goal_1" value="22.0">
 										</td>
 										<td align="center" style="width: 80px;">
-											<input type="text" class="time" name="TEMP_goal_2" value="25.0">
+											<input type="text" class="plot" name="TEMP_goal_2" value="25.0">
 										</td>
 										<td align="center" style="width: 80px;">
-											<input type="text" class="time" name="TEMP_goal_3" value="23.5">
+											<input type="text" class="plot" name="TEMP_goal_3" value="23.5">
 										</td>
 									</tr>
 									<tr>
-										<td align="center" style="background-color: #dddddd;">
-											<strong><i>時刻</i> [s]</strong>
+										<td align="center" style="width: 110px; background-color: #dddddd; font-size: 12px;">
+											時刻 [s]
 										</td>
 										<td align="center" style="width: 80px;">
-											<input type="text" class="time" name="TIME_goal_1" value="20.0">
+											<input type="text" class="plot" name="TIME_goal_1" value="20.0">
 										</td>
-										<td align="center">
-											<input type="text" class="time" name="TIME_goal_2" value="40.0">
+										<td align="center" style="width: 80px;">
+											<input type="text" class="plot" name="TIME_goal_2" value="40.0">
 										</td>
-										<td align="center">
-											<input type="text" class="time" name="TIME_goal_3" value="60.0">
+										<td align="center" style="width: 80px;">
+											<input type="text" class="plot" name="TIME_goal_3" value="60.0">
 										</td>
 									</tr>
 								</tbody>
 							</table>
 							<!-- --------------------------------------------------------------------------- -->
-							<table rules="groups" style="margin-top: 12px;">
+							<table rules="groups" style="margin-top: 20px;">
 								<thead>
 									<tr>
-										<th colspan="3">
-											グラフ設定 ( Time[s] / Temp[℃] )
+										<th colspan="3" style="font-size: 13px;">
+											グラフ設定 ( 時刻[s] | 温度[℃] )
 										</th>
 									</tr> 
 								</thead>
 								<tbody>
 									<tr>
-										<td align="center" style="background-color: #dddddd; width: 80px;">
-											<strong>最大値</strong>
+										<td align="center" style="width: 110px; background-color: #dddddd; font-size: 12px;">
+											最大値
 										</td>
-										<td align="center">
-											<input type="text" class="time" name="TIME_max" value="65.0">
+										<td align="center" style="width: 80px;">
+											<input type="text" class="plot" name="TIME_max" value="65.0">
 										</td>
-										<td align="center">
-											<input type="text" class="time" name="TEMP_plot_max" value="27.0">
-										</td>
-									</tr>
-									<tr>
-										<td align="center" style="background-color: #dddddd;">
-											<strong>最小値</strong>
-										</td>
-										<td align="center">
-											<input type="text" class="time" name="TIME_min" value="0.0">
-										</td>
-										<td align="center">
-											<input type="text" class="time" name="TEMP_plot_min" value="21.0">
+										<td align="center" style="width: 80px;">
+											<input type="text" class="plot" name="TEMP_plot_max" value="27.0">
 										</td>
 									</tr>
 									<tr>
-										<td align="center" style="background-color: #dddddd;">
-											<strong>刻み</strong>
+										<td align="center" style="width: 110px; background-color: #dddddd; font-size: 12px;">
+											最小値
 										</td>
-										<td align="center">
-											<input type="text" class="time" name="TIME_step" value="5.0">
+										<td align="center" style="width: 80px;">
+											<input type="text" class="plot" name="TIME_min" value="0.0">
 										</td>
-										<td align="center">
-											<input type="text" class="time" name="TEMP_plot_step" value="0.5">
+										<td align="center" style="width: 80px;">
+											<input type="text" class="plot" name="TEMP_plot_min" value="21.0">
+										</td>
+									</tr>
+									<tr>
+										<td align="center" style="width: 110px; background-color: #dddddd; font-size: 12px;">
+											刻み
+										</td>
+										<td align="center" style="width: 80px;">
+											<input type="text" class="plot" name="TIME_step" value="5.0">
+										</td>
+										<td align="center" style="width: 80px;">
+											<input type="text" class="plot" name="TEMP_plot_step" value="0.5">
 										</td>
 									</tr>
 								</tbody>
 							</table>
 							<!-- --------------------------------------------------------------------------- -->
 						</td>
-						<td style="padding-left: 10px; width="280px" valign="top">
+						<td valign="top">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						</td>
+						<td valign="top">
 							<!-- --------------------------------------------------------------------------- -->
 							<table rules="groups">
 								<thead>
 									<tr>
-										<th colspan="3">
+										<th colspan="3" style="font-size: 13px;">
 											PIDパラメータ
 										</th>
 									</tr> 
@@ -171,77 +172,82 @@
 								<tbody>
 									<!-- ------------------------------------------------------------------------------------ -->
 									<tr class="params">
-										<td align="center" style="background-color: #ffdb87;" width="180px"><strong>比例帯 PB [0~1]</strong></td>
-										
-										<td align="center">
-											<div class="params" width="100%">
-												<input type="range" class="pid" id="PID_pb_rng" min="0.9" max="1" step="0.01" value="0.9" data-popup-enabled="true">
-											</div>
+										<td align="center" style="width: 120px; background-color: #ffdb87; font-size: 12px;">
+											比例帯 <i>PB</i> [0~1]
 										</td>
-										
-										<td align="center" width="80px">
-											<div class="params">
-												<input type="number" class="pid" id="PID_pb_num" name="PID_pb" min="0.9" max="1" step="0.01" value="0.9" style="text-align:right">
-											</div>
+										<td align="center" width="200px">
+											<input type="range"  width="100%" id="PID_pb_rng" min="0.9" max="1" step="0.01" value="0.9">
+										</td>
+										<td align="center" style="width: 80px;">
+											<input type="number" class="pid" id="PID_pb_num" name="PID_pb" min="0.9" max="1" step="0.01" value="0.9">
 										</td>
 									</tr>
 									<!-- ------------------------------------------------------------------------------------ -->
 									<tr class="params">
-										<td align="center" style="background-color: #ffdb87;" width="180px"><strong><i>積分時間 T<sub>i</sub> [s]</i></strong></td>
-										
-										<td align="center">
-											<div class="params" width="100%">
-												<input type="range" class="pid" id="PID_i_rng" min="0.07" max="1.2" step="0.01" value="0.07" data-popup-enabled="true">
-											</div>
+										<td align="center" style="width: 120px; background-color: #ffdb87; font-size: 12px;">
+											積分時間 <i>T<sub>i</sub></i> [s]
 										</td>
 										
-										<td align="center" width="80px">
-											<div class="params">
-												<input type="number" class="pid" id="PID_i_num" name="PID_i" min="0.07" max="1.2" step="0.01" value="0.07" style="text-align:right">
-											</div>
+										<td align="center" width="200px">
+											<input type="range"  width="100%" id="PID_i_rng" min="0.07" max="1.2" step="0.01" value="0.07">
+										</td>
+										
+										<td align="center" style="width: 80px;">
+											<input type="number" class="pid" id="PID_i_num" name="PID_i" min="0.07" max="1.2" step="0.01" value="0.07">
 										</td>
 									</tr>
 									<!-- ------------------------------------------------------------------------------------ -->
 									<tr class="params">
-										<td align="center" style="background-color: #ffdb87;" width="180px"><strong><i>微分時間 T<sub>d</sub> [s]</i></strong></td>
-										
-										<td align="center">
-											<div class="params" width="100%">
-												<input type="range" class="pid" id="PID_d_rng" min="0.0" max="0.5" step="0.01" value="0.5" data-popup-enabled="true">
-											</div>
+										<td align="center" style="width: 120px; background-color: #ffdb87; font-size: 12px;">
+											微分時間 <i>T<sub>d</sub></i> [s]
 										</td>
 										
-										<td align="center" width="80px">
-											<div class="params">
-												<input type="number" class="pid" id="PID_d_num" name="PID_d" min="0.0" max="0.5" step="0.01" value="0.5" style="text-align:right">
-											</div>
+										<td align="center" width="200px">
+											<input type="range"  width="100%" id="PID_d_rng" min="0.0" max="0.5" step="0.01" value="0.5">
+										</td>
+										
+										<td align="center" style="width: 80px;">
+											<input type="number" class="pid" id="PID_d_num" name="PID_d" min="0.0" max="0.5" step="0.01" value="0.5">
+										</td>
+									</tr>
+									<!-- ------------------------------------------------------------------------------------ -->
+								</tbody>
+							</table>
+							<br>
+							<table rules="groups">
+								<thead>
+									<tr>
+										<th colspan="3" style="font-size: 13px;">
+											入力温度
+										</th>
+									</tr> 
+								</thead>
+								<tbody>
+									<!-- ------------------------------------------------------------------------------------ -->
+									<tr>
+										<td align="center" style="width: 140px; background-color: #dddddd; font-size: 12px;">
+											制御周期 <i>Δtc</i> [s]
+										</td>
+										<td align="center">
+											<input type="text" class="plot" name="PID_dt" value="0.5">
 										</td>
 									</tr>
 									<!-- ------------------------------------------------------------------------------------ -->
 									<tr>
-										<td align="center" style="background-color: #dddddd;" width="180px"><strong><i>制御周期Δtc [s]</i></strong></td>
-										<td align="center">
-											<input type="text" class="time" name="PID_dt" value="0.5">
+										<td align="center" style="width: 120px; background-color: #dddddd; font-size: 12px;">
+											上限 [℃]
 										</td>
 										<td align="center">
-										</td>
-									</tr>
-									<!-- ------------------------------------------------------------------------------------ -->
-									<tr>
-										<td align="center" style="background-color: #dddddd;" width="180px"><strong><i>入力温度@上限 [℃]</i></strong></td>
-										<td align="center">
-											<input type="text" class="time" name="TEMP_input_limU" value="26.5">
-										</td>
-										<td align="center">
+											<input type="text" class="plot" name="TEMP_input_limU" value="26.5">
 										</td>
 									</tr>
 									<!-- ------------------------------------------------------------------------------------ -->
 									<tr>
-										<td align="center" style="background-color: #dddddd;" width="180px"><strong><i>入力温度@下限 [℃]</i></strong></td>
-										<td align="center">
-											<input type="text" class="time" name="TEMP_input_limL" value="21.5">
+										<td align="center" style="width: 120px; background-color: #dddddd; font-size: 12px;">
+											下限 [℃]
 										</td>
 										<td align="center">
+											<input type="text" class="plot" name="TEMP_input_limL" value="21.5">
 										</td>
 									</tr>
 									<!-- ------------------------------------------------------------------------------------ -->
@@ -407,9 +413,9 @@
 				let color_thumb_shadow_on = 'rgba(0, 0, 255, .1)';
 				let color_thumb_shadow_off = 'none';
 				let color_num_on = 'rgba(50, 205, 50, .95)';
-				let color_num_off = 'rgba(128, 128, 128, .95)';
-				let size_num_on = '15px';
-				let size_num_off = '14px';
+				let color_num_off = 'rgba(128, 128, 128, 1.)';
+				let size_num_on = '14px';
+				let size_num_off = '13px';
 				let color_thumb = color_thumb_off;
 				let color_thumb_shadow = color_thumb_shadow_off;
 				let color_num = color_num_off;
