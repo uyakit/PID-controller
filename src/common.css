@@ -83,7 +83,7 @@ html, body {
     flex-direction: column; /* 垂直方向のスタック */
     background-color: rgba(53, 58, 64, .95); /* 背景色 */
     width: 200px; /* 幅 */
-    height: 200%; /* 高さ */
+    height: 160px; /* 高さ */
     justify-content: flex-start; /* 開始点から配置 */
     padding-top: 20px; /* 上部の内部余白 */
     transition: 0.3s; /* 位置変更のアニメーション時間 */
