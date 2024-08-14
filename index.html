@@ -402,224 +402,13 @@
 			let PID_error_prev2 = 0;
 			let PID_itemD = 0;
 			let PID_itemD_prev = 0;
+			
+			let arrTEMP_input = {};
+			let arrTEMP_monit = {};
 			//==================================================================
-			// リアルタイム更新 @Pb
-			let PID_pb_rng = document.getElementById('sim').PID_pb_rng;
-			let PID_pb_num = document.getElementById('sim').PID_pb_num;
-			let PID_pb_max = 1.0;
-			let PID_pb_ini = 0.9;
-			let PID_pb_min = 0.9;
-			
-			PID_pb_rng.oninput = (() => {
-				PID_pb_num.value = PID_pb_rng.value;
-				setAllRangesOff();
-				updateRangeStyles(PID_pb_rng, PID_pb_num, true)
-				updateGraph('sim', 'graph_input', 400, 300);
-				updateGraph('sim', 'graph_monit', 400, 300);
-			});
-			
-			PID_pb_rng.onmouseup = (()=>{
-				setAllRangesOff();
-			});
-			
-			PID_pb_rng.onblur = (()=>{
-				setAllRangesOff();
-			});
-			
-			PID_pb_num.addEventListener(`change`, () => {
-				PID_pb_num.value = PID_pb_num.value == "" ? PID_pb_ini : PID_pb_num.value;
-				PID_pb_num.value = Number(PID_pb_num.value);
-				PID_pb_num.value = isNaN(PID_pb_num.value) ? PID_pb_ini : PID_pb_num.value;
-				PID_pb_num.value = PID_pb_num.value > PID_pb_max ? PID_pb_max : PID_pb_num.value;
-				PID_pb_num.value = PID_pb_num.value < PID_pb_min ? PID_pb_min : PID_pb_num.value;
-				PID_pb_rng.value = PID_pb_num.value;
-				
-				setAllRangesOff();
-				updateRangeStyles(PID_pb_rng, PID_pb_num, true)
-				updateGraph('sim', 'graph_input', 400, 300);
-				updateGraph('sim', 'graph_monit', 400, 300);
-			});
-			
-			PID_pb_num.onmouseup = (()=>{
-				setAllRangesOff();
-			});
-			
-			PID_pb_num.onblur = (()=>{
-				setAllRangesOff();
-			});
-			//==================================================================
-			// リアルタイム更新 @Ti
-			let PID_i_rng = document.getElementById('sim').PID_i_rng;
-			let PID_i_num = document.getElementById('sim').PID_i_num;
-			let PID_i_max = 1.2;
-			let PID_i_ini = 0.08;
-			let PID_i_min = 0.08;
-			
-			PID_i_rng.oninput = (() => {
-				PID_i_num.value = PID_i_rng.value;
-				setAllRangesOff();
-				updateRangeStyles(PID_i_rng, PID_i_num, true)
-				updateGraph('sim', 'graph_input', 400, 300);
-				updateGraph('sim', 'graph_monit', 400, 300);
-			});
-			
-			PID_i_rng.onmouseup = (()=>{
-				setAllRangesOff();
-			});
-			
-			PID_i_rng.onblur = (()=>{
-				setAllRangesOff();
-			});
-			
-			PID_i_num.addEventListener(`change`, () => {
-				PID_i_num.value = PID_i_num.value == "" ? PID_i_ini : PID_i_num.value;
-				PID_i_num.value = Number(PID_i_num.value);
-				PID_i_num.value = isNaN(PID_i_num.value) ? PID_i_ini : PID_i_num.value;
-				PID_i_num.value = PID_i_num.value > PID_i_max ? PID_i_max : PID_i_num.value;
-				PID_i_num.value = PID_i_num.value < PID_i_min ? PID_i_min : PID_i_num.value;
-				PID_i_rng.value = PID_i_num.value;
-				
-				setAllRangesOff();
-				updateRangeStyles(PID_i_rng, PID_i_num, true)
-				updateGraph('sim', 'graph_input', 400, 300);
-				updateGraph('sim', 'graph_monit', 400, 300);
-			});
-			
-			PID_i_num.onmouseup = (()=>{
-				setAllRangesOff();
-			});
-			
-			PID_i_num.onblur = (()=>{
-				setAllRangesOff();
-			});
-			//==================================================================
-			// リアルタイム更新 @Td
-			let PID_d_rng = document.getElementById('sim').PID_d_rng;
-			let PID_d_num = document.getElementById('sim').PID_d_num;
-			let PID_d_max = 0.5;
-			let PID_d_ini = 0.5;
-			let PID_d_min = 0.1;
-			
-			PID_d_rng.oninput = (() => {
-				PID_d_num.value = PID_d_rng.value;
-				setAllRangesOff();
-				updateRangeStyles(PID_d_rng, PID_d_num, true)
-				updateGraph('sim', 'graph_input', 400, 300);
-				updateGraph('sim', 'graph_monit', 400, 300);
-			});
-			
-			PID_d_rng.onmouseup = (()=>{
-				setAllRangesOff();
-			});
-			
-			PID_d_rng.onblur = (()=>{
-				setAllRangesOff();
-			});
-			
-			PID_d_num.addEventListener(`change`, () => {
-				PID_d_num.value = PID_d_num.value == "" ? PID_d_ini : PID_d_num.value;
-				PID_d_num.value = Number(PID_d_num.value);
-				PID_d_num.value = isNaN(PID_d_num.value) ? PID_d_ini : PID_d_num.value;
-				PID_d_num.value = PID_d_num.value > PID_d_max ? PID_d_max : PID_d_num.value;
-				PID_d_num.value = PID_d_num.value < PID_d_min ? PID_d_min : PID_d_num.value;
-				PID_d_rng.value = PID_d_num.value;
-				
-				setAllRangesOff();
-				updateRangeStyles(PID_d_rng, PID_d_num, true)
-				updateGraph('sim', 'graph_input', 400, 300);
-				updateGraph('sim', 'graph_monit', 400, 300);
-			});
-			
-			PID_d_num.onmouseup = (()=>{
-				setAllRangesOff();
-			});
-			
-			PID_d_num.onblur = (()=>{
-				setAllRangesOff();
-			});
-			//==================================================================
-			function marchTime(plot_id, TEMP_goal_, TIME_goal_) {
-				//********************************************************************************************************
-				//実用偏差ディジタル PID（速度型；不完全微分） https://www.nikko-pb.co.jp/products/k_data/P12_13.pdf （5.15）式
-				let PID_eta = 0.12;  // 微分係数η ※通常0.1～0.125
-				let PID_Kp = Math.abs(TEMP_input_limU - TEMP_input_limL)/PID_pb;  // 「比例ゲインKp」と「比例帯Proportional Band」とは反比例の関係 https://www.as-1.co.jp/academy/15/15-4.html
-				//********************************************************************************************************
-				let cyc = 0;
-				let PID_timer = 0;
-				let DT_cyc = 0.1;  //制御周期Δtc
-				
-				gplot(TIME_now, TEMP_input);
-				
-				while (TIME_now < TIME_goal_) {
-					//--------------------------
-					cyc += 1;
-					TIME_now += DT_cyc;
-					PID_timer += DT_cyc;
-					//--------------------------
-					//################################################################################
-					if ( PID_timer >= PID_dt ) {
-						
-						PID_timer = 0.0;
-						//--------------------------------------------------------------------------
-						//操作量[%]  https://www.fa.omron.co.jp/guide/technicalguide/53/103/index.html
-						//※一先ず冷房想定
-						let PID_power;
-						
-						if ( TEMP_goal_ - TEMP_monit > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) {
-							PID_power = 0.0;  //出力OFF
-						} else if ( TEMP_monit - TEMP_goal_ > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) {
-							PID_power = 1.0;  //出力全開
-						} else {
-							PID_power = (TEMP_monit - TEMP_goal_ + Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5)
-							                                    / (Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
-						}
-						//--------------------------------------------------------------------------
-						if (flag_Heater > 0) {
-							PID_power = 1 - PID_power;
-						}
-						//--------------------------------------------------------------------------
-						// 偏差Error（設定値Set point Variable－測定値Process Variable）
-						PID_error =	(TEMP_goal_ - TEMP_monit)/(Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
-						//--------------------------------------------------------------------------
-						// ※「1次遅れフィルタ」 ※高周波成分を除去
-						let PID_filter = PID_d/(PID_dt + PID_eta * PID_d);
-						//--------------------------------------------------------------------------
-						// 操作信号（Manipulative Variable）
-						PID_itemD = PID_filter * PID_eta * PID_itemD_prev
-								  + PID_filter * (PID_error - 2 * PID_error_prev + PID_error_prev2);
-						
-						TEMP_input = TEMP_input_prev + PID_power * PID_Kp
-								* ( (PID_error - PID_error_prev)
-								   + PID_error * PID_dt/PID_i
-								   + PID_itemD
-								);
-						
-						 if (TEMP_input < TEMP_input_limL) TEMP_input = TEMP_input_limL; 
-						 if (TEMP_input > TEMP_input_limU) TEMP_input = TEMP_input_limU;
-						//--------------------------------------------------------------------------
-						// Update 'Prev' series
-						PID_error_prev2 = PID_error_prev;
-						PID_error_prev = PID_error;
-						PID_itemD_prev = PID_itemD;
-						TEMP_input_prev = TEMP_input;
-						//--------------------------------------------------------------------------
-					}
-					//################################################################################
-					//--------------------------
-					TEMP_monit += (TEMP_input - TEMP_monit) * 0.1;  //単純な熱伝導を仮定
-					
-					if (plot_id == 'graph_monit') {
-						gplot(TIME_now, TEMP_monit);
-					} else if (plot_id == 'graph_input') {
-						gplot(TIME_now, TEMP_input);
-					}
-					//--------------------------
-				}
-			}
-			//==================================================================			// Reset
+			// Reset
 			window.addEventListener('load', () => {
-				updateGraph('sim', 'graph_input', 400, 300);
-				updateGraph('sim', 'graph_monit', 400, 300);
+				updateGraph('sim', 400, 300);
 			});
 			
 			function setAllRangesOff () {
@@ -628,7 +417,34 @@
 				updateRangeStyles(PID_d_rng, PID_d_num, false);
 			}
 			//==================================================================
-			function updateGraph(form_id, plot_id, width, height) {
+			function updateRangeStyles (objRng, objNum, isOn) {
+				let color_thumb_on = 'rgba(124, 252, 0, .95)';
+				let color_thumb_off = 'rgba(72, 61, 139, .95)';
+				let color_thumb_shadow_on = 'rgba(0, 0, 255, .1)';
+				let color_thumb_shadow_off = 'none';
+				let color_num_on = 'rgba(50, 205, 50, .95)';
+				let color_num_off = 'rgba(128, 128, 128, 1.)';
+				let size_num_on = '14px';
+				let size_num_off = '13px';
+				let color_thumb = color_thumb_off;
+				let color_thumb_shadow = color_thumb_shadow_off;
+				let color_num = color_num_off;
+				let size_num = size_num_off;
+				
+				if (isOn) {
+					color_thumb = color_thumb_on;
+					color_thumb_shadow = color_thumb_shadow_on;
+					color_num = color_num_on;
+					size_num = size_num_on;
+				}
+				
+				objRng.style.setProperty('--color-range-thumb-background', color_thumb);
+				objRng.style.setProperty('--color-range-thumb-box-shadow', color_thumb_shadow);
+				objNum.style.color = color_num;
+				objNum.style.fontSize = size_num;
+			}
+			//==================================================================
+			function updateGraph(form_id, width, height) {
 				let forms = document.getElementById(form_id);
 				//-------------------------------------------------
 				TIME_goal_1 = parseFloat(forms.TIME_goal_1.value);
@@ -693,31 +509,21 @@
 				PID_error_prev	= PID_error;
 				PID_itemD_prev = PID_itemD;
 				//--------------------------------------------------------------------------
-				let lcol = "#00ff00";
-				if (plot_id == 'graph_monit') {
-					lcol = "#23f9fc";
-				} else if (plot_id == 'graph_input') {
-					lcol = "#ffc240";
-				}
+				// Time Marching
+				arrTIME = [];
+				arrTIME[0] = TIME_now;
+				arrTEMP_input = [];
+				arrTEMP_input[0] = TEMP_input;
+				arrTEMP_monit = [];
+				arrTEMP_monit[0] = TEMP_monit;
 				
-				
-				
-				
-				
-				
-				
-				
-				<!-- https://x-tech.pasona.co.jp/media/detail.html?p=2639 -->
-				
-				
-				
-				
-				
-				
-				
-				
+				marchTime(TIME_goal_1, TEMP_goal_1);
+				marchTime(TIME_goal_2, TEMP_goal_2);
+				marchTime(TIME_goal_3, TEMP_goal_3);
+				//--------------------------------------------------------------------------
+				// Graph @Input
 				gopen(
-					plot_id, 
+					'graph_input', 
 					TIME_min,
 					TIME_max,
 					TIME_step,
@@ -727,43 +533,249 @@
 					width,
 					height,
 					25, 25, 40, 50,
-					lcol
+					"#ffc240"
 				);
 				
-				marchTime(plot_id, TEMP_goal_1, TIME_goal_1);
-				marchTime(plot_id, TEMP_goal_2, TIME_goal_2);
-				marchTime(plot_id, TEMP_goal_3, TIME_goal_3);
+				for (let i = 0; i < arrTIME.length; i++) {
+					gplot(arrTIME[i], arrTEMP_input[i]);
+				}
+				
+				gclose();
+				//--------------------------------------------------------------------------
+				// Graph @Monitor
+				gopen(
+					'graph_monit', 
+					TIME_min,
+					TIME_max,
+					TIME_step,
+					TEMP_plot_min,
+					TEMP_plot_max,
+					TEMP_plot_step,
+					width,
+					height,
+					25, 25, 40, 50,
+					"#23f9fc"
+				);
+				
+				for (let i = 0; i < arrTIME.length; i++) {
+					gplot(arrTIME[i], arrTEMP_monit[i]);
+				}
 				
 				gclose();
 				//--------------------------------------------------------------------------
 			};
 			//==================================================================
-			function updateRangeStyles (objRng, objNum, isOn=false) {
-				let color_thumb_on = 'rgba(124, 252, 0, .95)';
-				let color_thumb_off = 'rgba(72, 61, 139, .95)';
-				let color_thumb_shadow_on = 'rgba(0, 0, 255, .1)';
-				let color_thumb_shadow_off = 'none';
-				let color_num_on = 'rgba(50, 205, 50, .95)';
-				let color_num_off = 'rgba(128, 128, 128, 1.)';
-				let size_num_on = '14px';
-				let size_num_off = '13px';
-				let color_thumb = color_thumb_off;
-				let color_thumb_shadow = color_thumb_shadow_off;
-				let color_num = color_num_off;
-				let size_num = size_num_off;
+			function marchTime(TIME_goal, TEMP_goal) {
+				//********************************************************************************************************
+				//実用偏差ディジタル PID（速度型；不完全微分） https://www.nikko-pb.co.jp/products/k_data/P12_13.pdf （5.15）式
+				let PID_eta = 0.12;  // 微分係数η ※通常0.1～0.125
+				let PID_Kp = Math.abs(TEMP_input_limU - TEMP_input_limL)/PID_pb;  // 「比例ゲインKp」と「比例帯Proportional Band」とは反比例の関係 https://www.as-1.co.jp/academy/15/15-4.html
+				//********************************************************************************************************
+				let cyc = 0;
+				let PID_timer = 0.0;
+				let DT_cyc = 0.1;  //制御周期Δtc
+				let PID_DtempPerSec_limit = 999;  //単位時間当りの許容温度変化[℃/s]
 				
-				if (isOn) {
-					color_thumb = color_thumb_on;
-					color_thumb_shadow = color_thumb_shadow_on;
-					color_num = color_num_on;
-					size_num = size_num_on;
+				while (TIME_now < TIME_goal) {
+					//--------------------------
+					cyc += 1;
+					TIME_now += DT_cyc;
+					PID_timer += DT_cyc;
+					//--------------------------
+					//################################################################################
+					if (PID_timer >= PID_dt) {
+						
+						PID_timer = 0.0;
+						//--------------------------------------------------------------------------
+						//操作量[%]  https://www.fa.omron.co.jp/guide/technicalguide/53/103/index.html
+						//※一先ず冷房想定
+						let PID_power;
+						
+							   if ( TEMP_goal - TEMP_monit > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) { //比例帯の「下」に外れる場合
+							PID_power = 0.0;  //出力OFF
+						} else if ( TEMP_monit - TEMP_goal > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) { //比例帯の「上」に外れる場合
+							PID_power = 1.0;  //出力全開
+						} else {
+							PID_power = (TEMP_monit - TEMP_goal + Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5)
+							                                    / (Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
+						}
+						//--------------------------------------------------------------------------
+						if (flag_Heater > 0) {
+							PID_power = 1 - PID_power;
+						}
+						//--------------------------------------------------------------------------
+						// 偏差Error（設定値Set point Variable－測定値Process Variable）
+						PID_error =	(TEMP_goal - TEMP_monit)/(Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
+						//--------------------------------------------------------------------------
+						// ※「1次遅れフィルタ」 ※高周波成分を除去
+						let PID_filter = PID_d/(PID_dt + PID_eta * PID_d);
+						//--------------------------------------------------------------------------
+						// 操作信号（Manipulative Variable）
+						PID_itemD = PID_filter * PID_eta * PID_itemD_prev
+						          + PID_filter * (PID_error - 2 * PID_error_prev + PID_error_prev2);
+						
+						TEMP_input = TEMP_input_prev + PID_power * PID_Kp
+						            * ( (PID_error - PID_error_prev)
+						               + PID_error * PID_dt/PID_i
+						               + PID_itemD
+						               );
+						//--------------------------------------------------------------------------
+						//単位時間当たりの「TempSA増分」に上限＆下限
+						<!-- if (PID_DtempPerCyc / PID_dt < (PID_DtempPerSec_limit * -1)) PID_DtempPerCyc = PID_DtempPerSec_limit * PID_dt * -1; -->
+						<!-- if (PID_DtempPerCyc / PID_dt >    PID_DtempPerSec_limit)     PID_DtempPerCyc = PID_DtempPerSec_limit * PID_dt; -->
+						
+						<!-- TempSA = TempSA_prev + PID_DtempPerCyc; -->
+						//--------------------------------------------------------------------------
+						//給気保障温度
+						 if (TEMP_input < TEMP_input_limL) TEMP_input = TEMP_input_limL; 
+						 if (TEMP_input > TEMP_input_limU) TEMP_input = TEMP_input_limU;
+						//--------------------------------------------------------------------------
+						// Update 'Prev' series
+						PID_error_prev2 = PID_error_prev;
+						PID_error_prev = PID_error;
+						PID_itemD_prev = PID_itemD;
+						TEMP_input_prev = TEMP_input;
+						//--------------------------------------------------------------------------
+					}
+					//################################################################################
+					//---------------------------------------------
+					TEMP_monit += (TEMP_input - TEMP_monit) * 0.1;  //単純な熱伝導を仮定
+					
+					arrTIME.push(TIME_now);
+					arrTEMP_monit.push(TEMP_monit);
+					arrTEMP_input.push(TEMP_input);
+					//---------------------------------------------
 				}
-				
-				objRng.style.setProperty('--color-range-thumb-background', color_thumb);
-				objRng.style.setProperty('--color-range-thumb-box-shadow', color_thumb_shadow);
-				objNum.style.fontSize = size_num;
-				objNum.style.color = color_num;
 			}
+			//==================================================================
+			// リアルタイム更新 @Pb
+			let PID_pb_rng = document.getElementById('sim').PID_pb_rng;
+			let PID_pb_num = document.getElementById('sim').PID_pb_num;
+			let PID_pb_max = 1.0;
+			let PID_pb_ini = 0.9;
+			let PID_pb_min = 0.9;
+			
+			PID_pb_rng.oninput = (() => {
+				PID_pb_num.value = PID_pb_rng.value;
+				setAllRangesOff();
+				updateRangeStyles(PID_pb_rng, PID_pb_num, true);
+				updateGraph('sim', 400, 300);
+			});
+			
+			PID_pb_rng.onmouseup = (()=>{
+				setAllRangesOff();
+			});
+			
+			PID_pb_rng.onblur = (()=>{
+				setAllRangesOff();
+			});
+			
+			PID_pb_num.addEventListener(`change`, () => {
+				PID_pb_num.value = PID_pb_num.value == "" ? PID_pb_ini : PID_pb_num.value;
+				PID_pb_num.value = Number(PID_pb_num.value);
+				PID_pb_num.value = isNaN(PID_pb_num.value) ? PID_pb_ini : PID_pb_num.value;
+				PID_pb_num.value = PID_pb_num.value > PID_pb_max ? PID_pb_max : PID_pb_num.value;
+				PID_pb_num.value = PID_pb_num.value < PID_pb_min ? PID_pb_min : PID_pb_num.value;
+				PID_pb_rng.value = PID_pb_num.value;
+				
+				setAllRangesOff();
+				updateRangeStyles(PID_pb_rng, PID_pb_num, true);
+				updateGraph('sim', 400, 300);
+			});
+			
+			PID_pb_num.onmouseup = (()=>{
+				setAllRangesOff();
+			});
+			
+			PID_pb_num.onblur = (()=>{
+				setAllRangesOff();
+			});
+			//==================================================================
+			// リアルタイム更新 @Ti
+			let PID_i_rng = document.getElementById('sim').PID_i_rng;
+			let PID_i_num = document.getElementById('sim').PID_i_num;
+			let PID_i_max = 1.2;
+			let PID_i_ini = 0.08;
+			let PID_i_min = 0.08;
+			
+			PID_i_rng.oninput = (() => {
+				PID_i_num.value = PID_i_rng.value;
+				setAllRangesOff();
+				updateRangeStyles(PID_i_rng, PID_i_num, true);
+				updateGraph('sim', 400, 300);
+			});
+			
+			PID_i_rng.onmouseup = (()=>{
+				setAllRangesOff();
+			});
+			
+			PID_i_rng.onblur = (()=>{
+				setAllRangesOff();
+			});
+			
+			PID_i_num.addEventListener(`change`, () => {
+				PID_i_num.value = PID_i_num.value == "" ? PID_i_ini : PID_i_num.value;
+				PID_i_num.value = Number(PID_i_num.value);
+				PID_i_num.value = isNaN(PID_i_num.value) ? PID_i_ini : PID_i_num.value;
+				PID_i_num.value = PID_i_num.value > PID_i_max ? PID_i_max : PID_i_num.value;
+				PID_i_num.value = PID_i_num.value < PID_i_min ? PID_i_min : PID_i_num.value;
+				PID_i_rng.value = PID_i_num.value;
+				
+				setAllRangesOff();
+				updateRangeStyles(PID_i_rng, PID_i_num, true);
+				updateGraph('sim', 400, 300);
+			});
+			
+			PID_i_num.onmouseup = (()=>{
+				setAllRangesOff();
+			});
+			
+			PID_i_num.onblur = (()=>{
+				setAllRangesOff();
+			});
+			//==================================================================
+			// リアルタイム更新 @Td
+			let PID_d_rng = document.getElementById('sim').PID_d_rng;
+			let PID_d_num = document.getElementById('sim').PID_d_num;
+			let PID_d_max = 0.5;
+			let PID_d_ini = 0.5;
+			let PID_d_min = 0.1;
+			
+			PID_d_rng.oninput = (() => {
+				PID_d_num.value = PID_d_rng.value;
+				setAllRangesOff();
+				updateRangeStyles(PID_d_rng, PID_d_num, true);
+				updateGraph('sim', 400, 300);
+			});
+			
+			PID_d_rng.onmouseup = (()=>{
+				setAllRangesOff();
+			});
+			
+			PID_d_rng.onblur = (()=>{
+				setAllRangesOff();
+			});
+			
+			PID_d_num.addEventListener(`change`, () => {
+				PID_d_num.value = PID_d_num.value == "" ? PID_d_ini : PID_d_num.value;
+				PID_d_num.value = Number(PID_d_num.value);
+				PID_d_num.value = isNaN(PID_d_num.value) ? PID_d_ini : PID_d_num.value;
+				PID_d_num.value = PID_d_num.value > PID_d_max ? PID_d_max : PID_d_num.value;
+				PID_d_num.value = PID_d_num.value < PID_d_min ? PID_d_min : PID_d_num.value;
+				PID_d_rng.value = PID_d_num.value;
+				
+				setAllRangesOff();
+				updateRangeStyles(PID_d_rng, PID_d_num, true);
+				updateGraph('sim', 400, 300);
+			});
+			
+			PID_d_num.onmouseup = (()=>{
+				setAllRangesOff();
+			});
+			
+			PID_d_num.onblur = (()=>{
+				setAllRangesOff();
+			});
 			//==================================================================
 			function round( number, precision ) {
 				let shift = function (number, precision, reverseShift) {
