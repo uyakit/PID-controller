@@ -77,7 +77,6 @@
 				font-family: monospace;
 			}
 		</style>
-		<link rel="stylesheet" href="./src/index.css" />
 		<link rel="stylesheet" href="./src/common.css" />
 		<link rel="stylesheet" href="./src/bootstrap.4.3.1.min.css" />  <!-- https://getbootstrap.jp/docs/4.5/getting-started/introduction/ -->
 	</head>
@@ -505,17 +504,11 @@
 					alert("[温度制御 下限] に入力ミスがあります");
 					return;
 				}
-				
-				if (flag_Heater > 0) {
-					TEMP_input_prev = TEMP_input_limL;
-					TEMP_input = TEMP_input_limL;
-					TEMP_monit = TEMP_input_limL;
-				} else {
-					TEMP_input_prev = TEMP_input_limU;
-					TEMP_input = TEMP_input_limU;
-					TEMP_monit = TEMP_input_limU;
-				}
 				//--------------------------------------------------------------------------
+				TEMP_input_prev = TEMP_input_limL;
+				TEMP_input = TEMP_input_limL;
+				TEMP_monit = TEMP_input_limL;
+				
 				// Update 'Prev' series
 				PID_error_prev2 = PID_error_prev;
 				PID_error_prev	= PID_error;
@@ -594,13 +587,18 @@
 					TIME_now += DT_cyc;
 					PID_timer += DT_cyc;
 					//--------------------------
+					
+					flag_Heater = 0;
+					
+					if (TEMP_goal > TEMP_monit) {
+						flag_Heater = 1;
+					}
 					//################################################################################
 					if (PID_timer >= PID_dt) {
 						
 						PID_timer = 0.0;
 						//--------------------------------------------------------------------------
 						//操作量[%]  https://www.fa.omron.co.jp/guide/technicalguide/53/103/index.html
-						//※一先ず冷房想定
 						let PID_power;
 						
 							   if ( TEMP_goal - TEMP_monit > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) { //比例帯の「下」に外れる場合
