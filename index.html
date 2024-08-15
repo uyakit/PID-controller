@@ -190,19 +190,19 @@
 											目標温度 [℃]
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TEMP_goal_1" min="21.5" max="26.5.0" step="0.5" value="22.0">
+											<input type="number" class="plot" id="TEMP_goal_1_num" name="TEMP_goal_1" min="21.5" max="26.5" step="0.5" value="22.0">
 										</td>
 										<td>
 											&nbsp;
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TEMP_goal_2" min="21.5" max="26.5.0" step="0.5" value="25.0">
+											<input type="number" class="plot" id="TEMP_goal_2_num" name="TEMP_goal_2" min="21.5" max="26.5" step="0.5" value="25.0">
 										</td>
 										<td>
 											&nbsp;
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TEMP_goal_3" min="21.5" max="26.5.0" step="0.5" value="23.5">
+											<input type="number" class="plot" id="TEMP_goal_3_num" name="TEMP_goal_3" min="21.5" max="26.5" step="0.5" value="23.5">
 										</td>
 									</tr>
 									<tr>
@@ -210,19 +210,19 @@
 											時刻 [s]
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TIME_goal_1" min="15.0" max="25.0" step="1.0" value="20.0">
+											<input type="number" class="plot" id="TIME_goal_1_num" name="TIME_goal_1" min="15.0" max="25.0" step="1.0" value="20.0">
 										</td>
 										<td>
 											&nbsp;
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TIME_goal_2" min="35.0" max="45.0" step="1.0" value="40.0">
+											<input type="number" class="plot" id="TIME_goal_2_num" name="TIME_goal_2" min="35.0" max="45.0" step="1.0" value="40.0">
 										</td>
 										<td>
 											&nbsp;
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TIME_goal_3" min="55.0" max="65.0" step="1.0" value="60.0">
+											<input type="number" class="plot" id="TIME_goal_3_num" name="TIME_goal_3" min="55.0" max="65.0" step="1.0" value="60.0">
 										</td>
 									</tr>
 								</tbody>
@@ -245,10 +245,10 @@
 											最大値
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TIME_max" min="65.0" max="100.0" step="5.0" value="65.0">
+											<input type="number" class="plot" id="TIME_max_num" name="TIME_max" min="65.0" max="100.0" step="5.0" value="65.0">
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TEMP_plot_max" min="27.0" max="35.0" step="0.5" value="27.0">
+											<input type="number" class="plot" id="TEMP_plot_max_num" name="TEMP_plot_max" min="27.0" max="35.0" step="0.5" value="27.0">
 										</td>
 									</tr>
 									<tr>
@@ -256,10 +256,10 @@
 											最小値
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TIME_min" min="0.0" max="10.0" step="5.0" value="0.0">
+											<input type="number" class="plot" id="TIME_min_num" name="TIME_min" min="0.0" max="10.0" step="5.0" value="0.0">
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TEMP_plot_min" min="0.0" max="21.0" step="5.0" value="21.0">
+											<input type="number" class="plot" id="TEMP_plot_min_num" name="TEMP_plot_min" min="0.0" max="21.0" step="5.0" value="21.0">
 										</td>
 									</tr>
 									<tr>
@@ -267,10 +267,10 @@
 											刻み
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TIME_step" min="5.0" max="20.0" step="5.0" value="5.0">
+											<input type="number" class="plot" id="TIME_step_num" name="TIME_step" min="5.0" max="20.0" step="5.0" value="5.0">
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TEMP_plot_step" min="0.5" max="5" step="0.5" value="0.5">
+											<input type="number" class="plot" id="TEMP_plot_step_num" name="TEMP_plot_step" min="0.5" max="5" step="0.5" value="0.5">
 										</td>
 									</tr>
 								</tbody>
@@ -371,7 +371,7 @@
 											制御周期 <i>Δtc</i> [s]
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="PID_dt" min="0.01" max="0.5" step="0.01" value="0.05">
+											<input type="number" class="plot" id="PID_dt_num" name="PID_dt" min="0.01" max="0.5" step="0.01" value="0.05">
 										</td>
 									</tr>
 									<!-- ------------------------------------------------------------------------------------ -->
@@ -380,7 +380,7 @@
 											上限 [℃]
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TEMP_input_limU" min="24.5" max="26.5" step="0.1" value="26.5">
+											<input type="number" class="plot" id="TEMP_input_limU_num" name="TEMP_input_limU" min="24.5" max="26.5" step="0.1" value="26.5">
 										</td>
 									</tr>
 									<!-- ------------------------------------------------------------------------------------ -->
@@ -389,7 +389,7 @@
 											下限 [℃]
 										</td>
 										<td align="center" style="width: 60px;">
-											<input type="number" class="plot" name="TEMP_input_limL" min="21.5" max="23.5" step="0.1" value="21.5">
+											<input type="number" class="plot" id="TEMP_input_limL_num" name="TEMP_input_limL" min="21.5" max="23.5" step="0.1" value="21.5">
 										</td>
 									</tr>
 									<!-- ------------------------------------------------------------------------------------ -->
@@ -821,6 +821,141 @@
 				objNum.style.color = color_num;
 				objNum.style.fontSize = size_num;
 			}
+			//==================================================================
+			const TIME_goal_1_num = document.getElementById('sim').TIME_goal_1_num;
+			let TIME_goal_1_num_max = 25.0;
+			let TIME_goal_1_num_ini = 20.0;
+			let TIME_goal_1_num_min = 15.0;
+			
+			TIME_goal_1_num.addEventListener(`change`, () => {
+				TIME_goal_1_num.value = TIME_goal_1_num.value == "" ? TIME_goal_1_num_ini : TIME_goal_1_num.value;
+				TIME_goal_1_num.value = Number(TIME_goal_1_num.value);
+				TIME_goal_1_num.value = isNaN(TIME_goal_1_num.value) ? TIME_goal_1_num_ini : TIME_goal_1_num.value;
+				TIME_goal_1_num.value = TIME_goal_1_num.value > TIME_goal_1_num_max ? TIME_goal_1_num_max : TIME_goal_1_num.value;
+				TIME_goal_1_num.value = TIME_goal_1_num.value < TIME_goal_1_num_min ? TIME_goal_1_num_min : TIME_goal_1_num.value;
+				
+				updateGraph('sim', 400, 300);
+			});
+			//==================================================================
+			const TIME_goal_2_num = document.getElementById('sim').TIME_goal_2_num;
+			let TIME_goal_2_num_max = 45.0;
+			let TIME_goal_2_num_ini = 40.0;
+			let TIME_goal_2_num_min = 35.0;
+			
+			TIME_goal_2_num.addEventListener(`change`, () => {
+				TIME_goal_2_num.value = TIME_goal_2_num.value == "" ? TIME_goal_2_num_ini : TIME_goal_2_num.value;
+				TIME_goal_2_num.value = Number(TIME_goal_2_num.value);
+				TIME_goal_2_num.value = isNaN(TIME_goal_2_num.value) ? TIME_goal_2_num_ini : TIME_goal_2_num.value;
+				TIME_goal_2_num.value = TIME_goal_2_num.value > TIME_goal_2_num_max ? TIME_goal_2_num_max : TIME_goal_2_num.value;
+				TIME_goal_2_num.value = TIME_goal_2_num.value < TIME_goal_2_num_min ? TIME_goal_2_num_min : TIME_goal_2_num.value;
+				
+				updateGraph('sim', 400, 300);
+			});
+			//==================================================================
+			const TIME_goal_3_num = document.getElementById('sim').TIME_goal_3_num;
+			let TIME_goal_3_num_max = 65.0;
+			let TIME_goal_3_num_ini = 60.0;
+			let TIME_goal_3_num_min = 55.0;
+			
+			TIME_goal_3_num.addEventListener(`change`, () => {
+				TIME_goal_3_num.value = TIME_goal_3_num.value == "" ? TIME_goal_3_num_ini : TIME_goal_3_num.value;
+				TIME_goal_3_num.value = Number(TIME_goal_3_num.value);
+				TIME_goal_3_num.value = isNaN(TIME_goal_3_num.value) ? TIME_goal_3_num_ini : TIME_goal_3_num.value;
+				TIME_goal_3_num.value = TIME_goal_3_num.value > TIME_goal_3_num_max ? TIME_goal_3_num_max : TIME_goal_3_num.value;
+				TIME_goal_3_num.value = TIME_goal_3_num.value < TIME_goal_3_num_min ? TIME_goal_3_num_min : TIME_goal_3_num.value;
+				
+				updateGraph('sim', 400, 300);
+			});
+			//==================================================================
+			const TEMP_goal_1_num = document.getElementById('sim').TEMP_goal_1_num;
+			let TEMP_goal_1_num_max = 26.5;
+			let TEMP_goal_1_num_ini = 22.0;
+			let TEMP_goal_1_num_min = 21.5;
+			
+			TEMP_goal_1_num.addEventListener(`change`, () => {
+				TEMP_goal_1_num.value = TEMP_goal_1_num.value == "" ? TEMP_goal_1_num_ini : TEMP_goal_1_num.value;
+				TEMP_goal_1_num.value = Number(TEMP_goal_1_num.value);
+				TEMP_goal_1_num.value = isNaN(TEMP_goal_1_num.value) ? TEMP_goal_1_num_ini : TEMP_goal_1_num.value;
+				TEMP_goal_1_num.value = TEMP_goal_1_num.value > TEMP_goal_1_num_max ? TEMP_goal_1_num_max : TEMP_goal_1_num.value;
+				TEMP_goal_1_num.value = TEMP_goal_1_num.value < TEMP_goal_1_num_min ? TEMP_goal_1_num_min : TEMP_goal_1_num.value;
+				
+				updateGraph('sim', 400, 300);
+			});
+			//==================================================================
+			const TEMP_goal_2_num = document.getElementById('sim').TEMP_goal_2_num;
+			let TEMP_goal_2_num_max = 26.5;
+			let TEMP_goal_2_num_ini = 25.0;
+			let TEMP_goal_2_num_min = 21.5;
+			
+			TEMP_goal_2_num.addEventListener(`change`, () => {
+				TEMP_goal_2_num.value = TEMP_goal_2_num.value == "" ? TEMP_goal_2_num_ini : TEMP_goal_2_num.value;
+				TEMP_goal_2_num.value = Number(TEMP_goal_2_num.value);
+				TEMP_goal_2_num.value = isNaN(TEMP_goal_2_num.value) ? TEMP_goal_2_num_ini : TEMP_goal_2_num.value;
+				TEMP_goal_2_num.value = TEMP_goal_2_num.value > TEMP_goal_2_num_max ? TEMP_goal_2_num_max : TEMP_goal_2_num.value;
+				TEMP_goal_2_num.value = TEMP_goal_2_num.value < TEMP_goal_2_num_min ? TEMP_goal_2_num_min : TEMP_goal_2_num.value;
+				
+				updateGraph('sim', 400, 300);
+			});
+			//==================================================================
+			const TEMP_goal_3_num = document.getElementById('sim').TEMP_goal_3_num;
+			let TEMP_goal_3_num_max = 26.5;
+			let TEMP_goal_3_num_ini = 23.5;
+			let TEMP_goal_3_num_min = 21.5;
+			
+			TEMP_goal_3_num.addEventListener(`change`, () => {
+				TEMP_goal_3_num.value = TEMP_goal_3_num.value == "" ? TEMP_goal_3_num_ini : TEMP_goal_3_num.value;
+				TEMP_goal_3_num.value = Number(TEMP_goal_3_num.value);
+				TEMP_goal_3_num.value = isNaN(TEMP_goal_3_num.value) ? TEMP_goal_3_num_ini : TEMP_goal_3_num.value;
+				TEMP_goal_3_num.value = TEMP_goal_3_num.value > TEMP_goal_3_num_max ? TEMP_goal_3_num_max : TEMP_goal_3_num.value;
+				TEMP_goal_3_num.value = TEMP_goal_3_num.value < TEMP_goal_3_num_min ? TEMP_goal_3_num_min : TEMP_goal_3_num.value;
+				
+				updateGraph('sim', 400, 300);
+			});
+			//==================================================================
+			const PID_dt_num = document.getElementById('sim').PID_dt_num;
+			let PID_dt_num_max = 0.5;
+			let PID_dt_num_ini = 0.05;
+			let PID_dt_num_min = 0.01;
+			
+			PID_dt_num.addEventListener(`change`, () => {
+				PID_dt_num.value = PID_dt_num.value == "" ? PID_dt_num_ini : PID_dt_num.value;
+				PID_dt_num.value = Number(PID_dt_num.value);
+				PID_dt_num.value = isNaN(PID_dt_num.value) ? PID_dt_num_ini : PID_dt_num.value;
+				PID_dt_num.value = PID_dt_num.value > PID_dt_num_max ? PID_dt_num_max : PID_dt_num.value;
+				PID_dt_num.value = PID_dt_num.value < PID_dt_num_min ? PID_dt_num_min : PID_dt_num.value;
+				
+				updateGraph('sim', 400, 300);
+			});
+			//==================================================================
+			const TEMP_input_limL_num = document.getElementById('sim').TEMP_input_limL_num;
+			let TEMP_input_limL_num_max = 23.5;
+			let TEMP_input_limL_num_ini = 21.5;
+			let TEMP_input_limL_num_min = 21.5;
+			
+			TEMP_input_limL_num.addEventListener(`change`, () => {
+				TEMP_input_limL_num.value = TEMP_input_limL_num.value == "" ? TEMP_input_limL_num_ini : TEMP_input_limL_num.value;
+				TEMP_input_limL_num.value = Number(TEMP_input_limL_num.value);
+				TEMP_input_limL_num.value = isNaN(TEMP_input_limL_num.value) ? TEMP_input_limL_num_ini : TEMP_input_limL_num.value;
+				TEMP_input_limL_num.value = TEMP_input_limL_num.value > TEMP_input_limL_num_max ? TEMP_input_limL_num_max : TEMP_input_limL_num.value;
+				TEMP_input_limL_num.value = TEMP_input_limL_num.value < TEMP_input_limL_num_min ? TEMP_input_limL_num_min : TEMP_input_limL_num.value;
+				
+				updateGraph('sim', 400, 300);
+			});
+			//==================================================================
+			const TEMP_input_limU_num = document.getElementById('sim').TEMP_input_limU_num;
+			let TEMP_input_limU_num_max = 26.5;
+			let TEMP_input_limU_num_ini = 26.5;
+			let TEMP_input_limU_num_min = 24.5;
+			
+			TEMP_input_limU_num.addEventListener(`change`, () => {
+				TEMP_input_limU_num.value = TEMP_input_limU_num.value == "" ? TEMP_input_limU_num_ini : TEMP_input_limU_num.value;
+				TEMP_input_limU_num.value = Number(TEMP_input_limU_num.value);
+				TEMP_input_limU_num.value = isNaN(TEMP_input_limU_num.value) ? TEMP_input_limU_num_ini : TEMP_input_limU_num.value;
+				TEMP_input_limU_num.value = TEMP_input_limU_num.value > TEMP_input_limU_num_max ? TEMP_input_limU_num_max : TEMP_input_limU_num.value;
+				TEMP_input_limU_num.value = TEMP_input_limU_num.value < TEMP_input_limU_num_min ? TEMP_input_limU_num_min : TEMP_input_limU_num.value;
+				
+				updateGraph('sim', 400, 300);
+			});
 			//==================================================================
 			//Hamburger menu
 			const mobileMenu = document.getElementById("mobile-menu");
