@@ -11,15 +11,6 @@ html, body {
   min-width:400px;
   overflow-x: hidden;  /* 横スクロールのみ無効 */
 }
-.outerframe main {
-  display: flex;
-  position: relative;
-  padding-top: 3rem;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
 
 .outerframe {
   min-height: 100%;
@@ -37,6 +28,100 @@ html, body {
   height: 8rem;
 }
 /* ------------------------------------------------------------------- */
+/* TABLES @input[type="range"] */
+
+.table-plotter{
+  width: 90%; /* 要素の横幅 */
+  line-height: 0.5em; /* 行高さ */
+  border-collapse: separate; /* 隣接セルの罫線を重離して表示 */
+  border-spacing: 10px 20px;
+  font-family: "メイリオ", calibri;/* フォントスタイル */
+  font-size: 13px; /* フォントサイズ */
+  color: #2e8b57; /* フォント色 */
+  /* font-weight: bold; /* フォント太さ */
+}
+
+.table-params{
+  width: 90%; /* 要素の横幅 */
+  line-height: 0.5em; /* 行高さ */
+  border-collapse: separate; /* 隣接セルの罫線を重離して表示 */
+  border-spacing: 10px 20px;
+  font-family: "メイリオ", calibri;/* フォントスタイル */
+  font-size: 13px; /* フォントサイズ *
+  /* font-weight: bold; /* フォント太さ */
+}
+
+.table-params tbody td{
+  padding:10px; /* セル余白(上下:左右) */
+  color:#ffffff; /* フォント色 */
+  text-align:center; /* テキスト位置 */
+  /* text-shadow:1px 1px 1px #fff; /* テキストフォント影 */
+  /* background-color:rgba(49,169,238,0.3); */
+  border: 2px solid #ffffff; /* 罫線スタイル */
+  border-radius: 12px; /* 罫線:角丸 */
+}
+
+tr[ class="params"] {
+  background-color: White; /* デフォルト背景色 */
+}
+
+tr[ class="params"]:hover {
+  background-color: rgba(104, 247, 161, .4);  /* 行背景色 */
+  color: rgba(66, 207, 122, 1.0); /* 文字色 */
+}
+/* ------------------------------------------------------------------- */
+/* SLIDERS @input[type="range"] */
+/* https://www.webdesignleaves.com/pr/css/input-range-style.html */
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  background: var(--color-range-background);
+  height: 16px;
+  width: 100%;
+  border-radius: 12px;
+  border: solid 2px var(--color-range-border);
+}
+/* -------------------- */
+/* Thumb: Chrome, Safari, Opera, Edge Chromium */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  background-color: var(--color-range-thumb-background);
+  box-shadow: 0 0 0 7px var(--color-range-thumb-box-shadow);
+  border-radius: 50%;
+}
+/* -------------------- */
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+  border: none; /* つまみ部の枠線削除 */
+  height: 20px;
+  width: 20px;
+  background-color: var(--color-range-thumb-background);
+  box-shadow: 0 0 0 7px var(--color-range-thumb-box-shadow);
+  border-radius: 50%;
+}
+/* -------------------- */
+input[type="number"] {
+  font-family: "メイリオ", calibri;/* フォントスタイル */
+  font-size: 14px; /* フォントサイズ */
+  color: rgba(128, 128, 128, .95); /* フォント色 */
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  background: #ffffff;
+  height: 32px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #696969; /* 罫線スタイル */
+  border-radius: 4px; /* 罫線: 角丸 */
+}
+/* ------------------------------------------------------------------- */
+
 /* https://web-den.com/hamburger-menu-js */
 
 .nav-list {
@@ -83,7 +168,7 @@ html, body {
     flex-direction: column; /* 垂直方向のスタック */
     background-color: rgba(53, 58, 64, .95); /* 背景色 */
     width: 200px; /* 幅 */
-    height: 160px; /* 高さ */
+    height: 200%; /* 高さ */
     justify-content: flex-start; /* 開始点から配置 */
     padding-top: 20px; /* 上部の内部余白 */
     transition: 0.3s; /* 位置変更のアニメーション時間 */
