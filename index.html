@@ -410,39 +410,6 @@
 			window.addEventListener('load', () => {
 				updateGraph('sim', 400, 300);
 			});
-			
-			function setAllRangesOff () {
-				updateRangeStyles(PID_pb_rng, PID_pb_num, false);
-				updateRangeStyles(PID_i_rng, PID_i_num, false);
-				updateRangeStyles(PID_d_rng, PID_d_num, false);
-			}
-			//==================================================================
-			function updateRangeStyles (objRng, objNum, isOn) {
-				let color_thumb_on = 'rgba(124, 252, 0, .95)';
-				let color_thumb_off = 'rgba(72, 61, 139, .95)';
-				let color_thumb_shadow_on = 'rgba(0, 0, 255, .1)';
-				let color_thumb_shadow_off = 'none';
-				let color_num_on = 'rgba(50, 205, 50, .95)';
-				let color_num_off = 'rgba(128, 128, 128, 1.)';
-				let size_num_on = '14px';
-				let size_num_off = '13px';
-				let color_thumb = color_thumb_off;
-				let color_thumb_shadow = color_thumb_shadow_off;
-				let color_num = color_num_off;
-				let size_num = size_num_off;
-				
-				if (isOn) {
-					color_thumb = color_thumb_on;
-					color_thumb_shadow = color_thumb_shadow_on;
-					color_num = color_num_on;
-					size_num = size_num_on;
-				}
-				
-				objRng.style.setProperty('--color-range-thumb-background', color_thumb);
-				objRng.style.setProperty('--color-range-thumb-box-shadow', color_thumb_shadow);
-				objNum.style.color = color_num;
-				objNum.style.fontSize = size_num;
-			}
 			//==================================================================
 			function updateGraph(form_id, width, height) {
 				let forms = document.getElementById(form_id);
@@ -649,8 +616,8 @@
 			}
 			//==================================================================
 			// リアルタイム更新 @Pb
-			let PID_pb_rng = document.getElementById('sim').PID_pb_rng;
-			let PID_pb_num = document.getElementById('sim').PID_pb_num;
+			const PID_pb_rng = document.getElementById('sim').PID_pb_rng;
+			const PID_pb_num = document.getElementById('sim').PID_pb_num;
 			let PID_pb_max = 1.0;
 			let PID_pb_ini = 0.9;
 			let PID_pb_min = 0.9;
@@ -692,8 +659,8 @@
 			});
 			//==================================================================
 			// リアルタイム更新 @Ti
-			let PID_i_rng = document.getElementById('sim').PID_i_rng;
-			let PID_i_num = document.getElementById('sim').PID_i_num;
+			const PID_i_rng = document.getElementById('sim').PID_i_rng;
+			const PID_i_num = document.getElementById('sim').PID_i_num;
 			let PID_i_max = 1.2;
 			let PID_i_ini = 0.08;
 			let PID_i_min = 0.08;
@@ -735,8 +702,8 @@
 			});
 			//==================================================================
 			// リアルタイム更新 @Td
-			let PID_d_rng = document.getElementById('sim').PID_d_rng;
-			let PID_d_num = document.getElementById('sim').PID_d_num;
+			const PID_d_rng = document.getElementById('sim').PID_d_rng;
+			const PID_d_num = document.getElementById('sim').PID_d_num;
 			let PID_d_max = 0.5;
 			let PID_d_ini = 0.5;
 			let PID_d_min = 0.1;
@@ -777,15 +744,37 @@
 				setAllRangesOff();
 			});
 			//==================================================================
-			function round( number, precision ) {
-				let shift = function (number, precision, reverseShift) {
-					if (reverseShift) {
-						precision = -precision;
-					}
-					let numArray = ("" + number).split("e");
-					return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision) : precision));
-				};
-				return shift(Math.round(shift(number, precision, false)), precision, true);
+			function setAllRangesOff () {
+				updateRangeStyles(PID_pb_rng, PID_pb_num, false);
+				updateRangeStyles(PID_i_rng, PID_i_num, false);
+				updateRangeStyles(PID_d_rng, PID_d_num, false);
+			}
+			//==================================================================
+			function updateRangeStyles (objRng, objNum, isOn) {
+				let color_thumb_on = 'rgba(124, 252, 0, .95)';
+				let color_thumb_off = 'rgba(72, 61, 139, .95)';
+				let color_thumb_shadow_on = 'rgba(0, 0, 255, .1)';
+				let color_thumb_shadow_off = 'none';
+				let color_num_on = 'rgba(50, 205, 50, .95)';
+				let color_num_off = 'rgba(128, 128, 128, 1.)';
+				let size_num_on = '14px';
+				let size_num_off = '13px';
+				let color_thumb = color_thumb_off;
+				let color_thumb_shadow = color_thumb_shadow_off;
+				let color_num = color_num_off;
+				let size_num = size_num_off;
+				
+				if (isOn) {
+					color_thumb = color_thumb_on;
+					color_thumb_shadow = color_thumb_shadow_on;
+					color_num = color_num_on;
+					size_num = size_num_on;
+				}
+				
+				objRng.style.setProperty('--color-range-thumb-background', color_thumb);
+				objRng.style.setProperty('--color-range-thumb-box-shadow', color_thumb_shadow);
+				objNum.style.color = color_num;
+				objNum.style.fontSize = size_num;
 			}
 			//==================================================================
 			//Hamburger menu
@@ -796,6 +785,17 @@
 				navList.classList.toggle("nav-active");
 				mobileMenu.classList.toggle("toggle");
 			});
+			//==================================================================
+			function round( number, precision ) {
+				let shift = function (number, precision, reverseShift) {
+					if (reverseShift) {
+						precision = -precision;
+					}
+					let numArray = ("" + number).split("e");
+					return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision) : precision));
+				};
+				return shift(Math.round(shift(number, precision, false)), precision, true);
+			}
 			//==================================================================
 		</script>
 		
