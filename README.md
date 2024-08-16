@@ -28,7 +28,7 @@ Available now; No more additional installations needed.
 
 1. Webブラウザで [メインサイト](https://pid-controller.kii-tone.net/) へアクセスします.
 
-2. 「<font color="#0D7EAB">制御点温度</font>」の時間推移に、「Overshoot（超過）」や「ハンチング（振動）」が現れなくなるよう、<b>[PIDパラメータ]</b> を調整します。
+2. 「<font color="#0D7EAB">制御点温度</font>」の時間推移に、「Overshoot（超過）」や「Hunting（振動）」が現れなくなるよう、<b>[PIDパラメータ]</b> を調整します。
 </p>
 
 ![](./PID-controller.gif){ width=90% }
