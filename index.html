@@ -786,39 +786,6 @@
 				setAllRangesOff();
 			});
 			//==================================================================
-			function setAllRangesOff () {
-				updateRangeStyles(PID_pb_rng, PID_pb_num, false);
-				updateRangeStyles(PID_i_rng, PID_i_num, false);
-				updateRangeStyles(PID_d_rng, PID_d_num, false);
-			}
-			//==================================================================
-			function updateRangeStyles (objRng, objNum, isOn) {
-				let color_thumb_on = 'rgba(124, 252, 0, .95)';
-				let color_thumb_off = 'rgba(72, 61, 139, .95)';
-				let color_thumb_shadow_on = 'rgba(0, 0, 255, .1)';
-				let color_thumb_shadow_off = 'none';
-				let color_num_on = 'rgba(50, 205, 50, .95)';
-				let color_num_off = 'rgba(128, 128, 128, 1.)';
-				let size_num_on = '14px';
-				let size_num_off = '13px';
-				let color_thumb = color_thumb_off;
-				let color_thumb_shadow = color_thumb_shadow_off;
-				let color_num = color_num_off;
-				let size_num = size_num_off;
-				
-				if (isOn) {
-					color_thumb = color_thumb_on;
-					color_thumb_shadow = color_thumb_shadow_on;
-					color_num = color_num_off;
-					size_num = size_num_on;
-				}
-				
-				objRng.style.setProperty('--color-range-thumb-background', color_thumb);
-				objRng.style.setProperty('--color-range-thumb-box-shadow', color_thumb_shadow);
-				objNum.style.color = color_num;
-				objNum.style.fontSize = size_num;
-			}
-			//==================================================================
 			const TIME_goal_1_num = document.getElementById('sim').TIME_goal_1_num;
 			let TIME_goal_1_num_max = 25.0;
 			let TIME_goal_1_num_ini = 20.0;
@@ -953,6 +920,39 @@
 				
 				updateGraph('sim', 400, 300);
 			});
+			//==================================================================
+			function updateRangeStyles (objRng, objNum, isOn) {
+				let color_thumb_on = 'rgba(124, 252, 0, .95)';
+				let color_thumb_off = 'rgba(72, 61, 139, .95)';
+				let color_thumb_shadow_on = 'rgba(0, 0, 255, .1)';
+				let color_thumb_shadow_off = 'none';
+				let color_num_on = 'rgba(50, 205, 50, .95)';
+				let color_num_off = 'rgba(128, 128, 128, .95)';
+				let size_num_on = '14.5px';
+				let size_num_off = '13px';
+				let color_thumb = color_thumb_off;
+				let color_thumb_shadow = color_thumb_shadow_off;
+				let color_num = color_num_off;
+				let size_num = size_num_off;
+				
+				if (isOn) {
+					color_thumb = color_thumb_on;
+					color_thumb_shadow = color_thumb_shadow_on;
+					color_num = color_num_on;
+					size_num = size_num_on;
+				}
+				
+				objRng.style.setProperty('--color-range-thumb-background', color_thumb);
+				objRng.style.setProperty('--color-range-thumb-box-shadow', color_thumb_shadow);
+				objNum.style.color = color_num;
+				objNum.style.fontSize = size_num;
+			}
+			//==================================================================
+			function setAllRangesOff () {
+				updateRangeStyles(PID_pb_rng, PID_pb_num, false);
+				updateRangeStyles(PID_i_rng, PID_i_num, false);
+				updateRangeStyles(PID_d_rng, PID_d_num, false);
+			}
 			//==================================================================
 			//Hamburger menu
 			const mobileMenu = document.getElementById("mobile-menu");
