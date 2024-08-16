@@ -1,5 +1,5 @@
 ---
-title: "[.png into flat .stl | README](https://png--stl.azurewebsites.net/public/README.html)"
+title: "[PID-controller | README](https://pid-controller.kii-tone.net/src/README.html)"
 date: Released under the [MIT License](https://opensource.org/licenses/mit-license.php)
 ---
 
@@ -7,15 +7,13 @@ date: Released under the [MIT License](https://opensource.org/licenses/mit-licen
 ### Introduction
 
 <p style="text-indent:2em; font-size: 115%;">
-Mesh a <font color="MediumSeaGreen"> .png</font> picture into flat <font color="MediumSeaGreen">.stl</font> format.
+「<font color="#0D7EAB">制御点温度</font>」が「目標温度(3段階)」へ滑らかに順次、Fitしていくよう、「<font color="#C04F15">入力温度</font>」をPID制御します。
 </p>
 
 ### Requirements
 
 <p style="text-indent:2em; font-size: 115%;">
-
-- A <font color="MediumSeaGreen">White background</font> picture expected to be loaded; The result mesh go finer as colors go deeper.
-- Google Chrome on a <font color="MediumSeaGreen">Desktop PC</font> with 'Desktop site' mode preferred.
+Google Chrome on a <font color="MediumSeaGreen">Desktop PC</font> with 'Desktop site' mode preferred.
 </p>
 
 ### Installation
@@ -28,13 +26,11 @@ Available now; No more additional installations needed.
 
 <p style="text-indent:3em; font-size: 115%;">
 
-1. Visit the [main site](https://png--stl.azurewebsites.net/).
+1. Webブラウザで [メインサイト](https://pid-controller.kii-tone.net/) へアクセスします.
 
-2. Specify a .png file to be meshed.
-
-3. Click 'Download .stl' button to download it in the flat .stl format.
+2. 「<font color="#0D7EAB">制御点温度</font>」の時間推移に、「Overshoot（超過）」や「ハンチング（振動）」が現れなくなるよう、<b>[PIDパラメータ]</b> を調整します。
 </p>
 
-![](./png2stl.gif){ width=90% }
+![](./PID-controller.gif){ width=90% }
 <br>
 <br>
