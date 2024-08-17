@@ -581,14 +581,11 @@
 				let PID_Kp = Math.abs(TEMP_input_limU - TEMP_input_limL)/PID_pb;  // 「比例ゲインKp」vs「比例帯Proportional Band」：「反比例」関係
 				//********************************************************************************************************
 				let cyc = 0;
-				let PID_timer = 0.0;
-				let DT_cyc = PID_dt;  //制御周期Δtc
 				
 				while (TIME_now < TIME_goal) {
 					//--------------------------
 					cyc += 1;
-					PID_timer += DT_cyc;
-					TIME_now += DT_cyc;
+					TIME_now += PID_dt;
 					//--------------------------
 					let flag_Heater = 0;
 					
@@ -597,55 +594,51 @@
 					}
 					//--------------------------
 					//################################################################################
-					if (PID_timer >= PID_dt) {
-						
-						PID_timer = 0.0;
-						//--------------------------------------------------------------------------
-						//操作量[%]  https://www.fa.omron.co.jp/guide/technicalguide/53/103/index.html
-						
-						let PID_power;
-						// #一先ず、冷房想定
-							   if ( TEMP_goal - TEMP_monit > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) { //比例帯の「下」に外れる場合
-							PID_power = 0.0;  //出力OFF
-						} else if ( TEMP_monit - TEMP_goal > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) { //比例帯の「上」に外れる場合
-							PID_power = 1.0;  //出力全開
-						} else {
-							PID_power = (TEMP_monit - TEMP_goal + Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5)
-							                                   / (Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
-						}
-						//--------------------------------------------------------------------------
-						if (flag_Heater > 0) {
-							PID_power = 1 - PID_power;
-						}
-						//--------------------------------------------------------------------------
-						// 偏差Error（設定値Set point Variable－測定値Process Variable）
-						PID_error =	(TEMP_goal - TEMP_monit)/(Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
-						//--------------------------------------------------------------------------
-						// ※「1次遅れフィルタ」 ※高周波成分を除去
-						let PID_filter = PID_d/(PID_dt + PID_eta * PID_d);
-						//--------------------------------------------------------------------------
-						// 操作信号（Manipulative Variable）
-						PID_itemD = PID_filter * PID_eta * PID_itemD_prev
-						          + PID_filter * (PID_error - 2 * PID_error_prev + PID_error_prev2);
-						
-						//実用偏差ディジタル PID（速度型；不完全微分） https://www.nikko-pb.co.jp/products/k_data/P12_13.pdf （5.15）式
-						TEMP_input = TEMP_input_prev + PID_power * PID_Kp
-						            * ( (PID_error - PID_error_prev)
-						               + PID_error * PID_dt/PID_i
-						               + PID_itemD
-						               );
-						//--------------------------------------------------------------------------
-						//給気保障温度
-						 if (TEMP_input < TEMP_input_limL) TEMP_input = TEMP_input_limL; 
-						 if (TEMP_input > TEMP_input_limU) TEMP_input = TEMP_input_limU;
-						//--------------------------------------------------------------------------
-						// Update 'Prev' series
-						PID_error_prev2 = PID_error_prev;
-						PID_error_prev = PID_error;
-						PID_itemD_prev = PID_itemD;
-						TEMP_input_prev = TEMP_input;
-						//--------------------------------------------------------------------------
+					//--------------------------------------------------------------------------
+					//操作量[%]  https://www.fa.omron.co.jp/guide/technicalguide/53/103/index.html
+					
+					let PID_power;
+					// #一先ず、冷房想定
+						   if ( TEMP_goal - TEMP_monit > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) { //比例帯の「下」に外れる場合
+						PID_power = 0.0;  //出力OFF
+					} else if ( TEMP_monit - TEMP_goal > Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5 ) { //比例帯の「上」に外れる場合
+						PID_power = 1.0;  //出力全開
+					} else {
+						PID_power = (TEMP_monit - TEMP_goal + Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb * 0.5)
+						                                   / (Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
 					}
+					//--------------------------------------------------------------------------
+					if (flag_Heater > 0) {
+						PID_power = 1 - PID_power;
+					}
+					//--------------------------------------------------------------------------
+					// 偏差Error（設定値Set point Variable－測定値Process Variable）
+					PID_error =	(TEMP_goal - TEMP_monit)/(Math.abs(TEMP_input_limU - TEMP_input_limL) * PID_pb);
+					//--------------------------------------------------------------------------
+					// ※「1次遅れフィルタ」 ※高周波成分を除去
+					let PID_filter = PID_d/(PID_dt + PID_eta * PID_d);
+					//--------------------------------------------------------------------------
+					// 操作信号（Manipulative Variable）
+					PID_itemD = PID_filter * PID_eta * PID_itemD_prev
+							  + PID_filter * (PID_error - 2 * PID_error_prev + PID_error_prev2);
+					
+					//実用偏差ディジタル PID（速度型；不完全微分） https://www.nikko-pb.co.jp/products/k_data/P12_13.pdf （5.15）式
+					TEMP_input = TEMP_input_prev + PID_power * PID_Kp
+					            * ( (PID_error - PID_error_prev)
+					               + PID_error * PID_dt/PID_i
+					               + PID_itemD
+					               );
+					//--------------------------------------------------------------------------
+					//給気保障温度
+					 if (TEMP_input < TEMP_input_limL) TEMP_input = TEMP_input_limL; 
+					 if (TEMP_input > TEMP_input_limU) TEMP_input = TEMP_input_limU;
+					//--------------------------------------------------------------------------
+					// Update 'Prev' series
+					PID_error_prev2 = PID_error_prev;
+					PID_error_prev = PID_error;
+					PID_itemD_prev = PID_itemD;
+					TEMP_input_prev = TEMP_input;
+					//--------------------------------------------------------------------------
 					//################################################################################
 					//---------------------------------------------
 					TEMP_monit += (TEMP_input - TEMP_monit) * 0.1;  //単純な熱伝導を仮定
